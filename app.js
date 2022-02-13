@@ -10,6 +10,10 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }))
 
 //mailchimp API
+
+// KEY 60ddf32ea34facd0fcba20dbda6c0cb3-us14
+// list id 24f08cd023
+
 mailchimp.setConfig({
     apiKey: "60ddf32ea34facd0fcba20dbda6c0cb3-us14",
     server: "us14",
@@ -48,14 +52,6 @@ app.post("/", (req, res) => {
 
 
 
-
-
-// KEY 60ddf32ea34facd0fcba20dbda6c0cb3-us14
-
-// list id 24f08cd023
-
-// https://<dc>.api.mailchimp.com/3.0/
-
-app.listen(3000, () => {
-    console.log("server running on port 3000")
+app.listen(process.env.PORT || 3000, () => {
+    console.log("server running ")
 }) 
