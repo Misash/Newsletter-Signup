@@ -35,19 +35,27 @@ app.post("/", (req, res) => {
 
 
     const run = async () => {
-        const response = await mailchimp.lists.addListMember("24f08cd023", {
-            email_address: email,
-            status: "subscribed",
-            merge_fields: {
-                FNAME: firstName ,
-                LNAME: lastName
-            }
-        });
-        console.log(response);
+        try {
+            const response = await mailchimp.lists.addListMember("24f08cd023", {
+                email_address: email,
+                status: "subscribed",
+                merge_fields: {
+                    FNAME: firstName,
+                    LNAME: lastName
+                }
+            });
+            console.log(response);
+            res.sendFile(__dirname + "/success.html");
+
+        } catch (err) {
+            console.log(err.status);
+            res.sendFile(__dirname + "/failure.html");
+        }
+
     };
-    
+
     run();
-    
+
 })
 
 
